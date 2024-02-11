@@ -15,7 +15,7 @@ const render = require("./src/page-template.js");
 
 let team = [];
 
-// Inquirer questions
+// Question
 const getManagersDetails = () => {
   const mangerQuestions = () => {
     return inquirer.prompt([
@@ -58,42 +58,7 @@ const getManagersDetails = () => {
   }
   init();
 };
-// getManagersDetails();
 
-const selectOption = () => {
-  const selectAction = () => {
-    return inquirer.prompt([
-      {
-        type: "list",
-        message: "Select your next step",
-        choices: [
-          "Add an engineer",
-          "Add an inter",
-          "Finish building the team",
-        ],
-        name: "options",
-      },
-    ]);
-  };
-  async function init() {
-    try {
-      const options = await selectAction();
-      console.log(options.options);
-      if (options.options === "Add an engineer") {
-        addNewEngineer();
-      } else if (options.options === "Add an inter") {
-        addNewIntern();
-      } else {
-        console.log("Finish app");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  init();
-};
-
-selectOption();
 const addNewEngineer = () => {
   const addEngineer = () => {
     return inquirer.prompt([
@@ -129,7 +94,6 @@ const addNewEngineer = () => {
         engineerInfo.engineerGithub
       );
       team.push(engineer);
-      console.log(team);
       selectOption();
     } catch (err) {
       console.log(err);
@@ -138,7 +102,6 @@ const addNewEngineer = () => {
   init();
 };
 
-// addNewEngineer();
 const addNewIntern = () => {
   const addIntern = () => {
     return inquirer.prompt([
@@ -174,7 +137,6 @@ const addNewIntern = () => {
         internInfo.internsSchool
       );
       team.push(intern);
-      console.log(team);
       selectOption();
     } catch (err) {
       console.log(err);
@@ -183,20 +145,45 @@ const addNewIntern = () => {
   init();
 };
 
-async function init() {
-  try {
-    const managerInfo = await mangerQuestions();
-    const manager = new Manager(
-      managerInfo.managersName,
-      managerInfo.managersID,
-      managerInfo.managersEmail,
-      managerInfo.managersNumber
-    );
-    team.push(manager);
-    console.log(team);
-  } catch (err) {
-    console.log(err);
+const selectOption = () => {
+  const selectAction = () => {
+    return inquirer.prompt([
+      {
+        type: "list",
+        message: "Select your next step",
+        choices: [
+          "Add an engineer",
+          "Add an inter",
+          "Finish building the team",
+        ],
+        name: "options",
+      },
+    ]);
+  };
+  async function init() {
+    try {
+      const options = await selectAction();
+      console.log(options.options);
+      if (options.options === "Add an engineer") {
+        addNewEngineer();
+      } else if (options.options === "Add an inter") {
+        addNewIntern();
+      } else {
+        const html = render(team);
+        // Write HTML content to the output file
+        fs.writeFile(outputPath, html, (err) => {
+          if (err) {
+            console.error("Error writing HTML file:", err);
+          } else {
+            console.log("Team HTML file generated successfully:", outputPath);
+          }
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
-}
+  init();
+};
 
-// init();
+getManagersDetails();
