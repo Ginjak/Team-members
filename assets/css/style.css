@@ -1,0 +1,33 @@
+body {
+  background: #f9f3fc;
+}
+.team-heading {
+  background: #7804ad;
+  border-bottom: 3px solid #35024d;
+}
+h3.card-title {
+  color: #fff;
+}
+.card-header {
+  background: #35024d;
+  color: #f5e7fc;
+}
+.card-body {
+  background: #f5e7fc;
+}
+
+.list-group-item {
+  background: #35024d;
+  color: #fff;
+  border-color: #f5e7fc;
+}
+.list-group-item a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+.list-group-item a:hover,
+.list-group-item a:visited {
+  color: #f5e7fc;
+  transition: color 0.2s ease-in-out;
+}
