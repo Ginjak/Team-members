@@ -23,21 +23,49 @@ const getManagersDetails = () => {
         type: "input",
         message: "Team managers name",
         name: "managersName",
+        validate: function (value) {
+          if (!/\d/.test(value) && value !== "") {
+            return true;
+          } else {
+            return "Please enter a valid name (cannot be a number or an empty line).";
+          }
+        },
       },
       {
         type: "input",
         message: "Managers ID",
         name: "managersID",
+        validate: function (value) {
+          if (/\d/.test(value) && value !== "") {
+            return true;
+          } else {
+            return "Please enter a valid ID (must be a number).";
+          }
+        },
       },
       {
         type: "input",
         message: "Managers email address",
         name: "managersEmail",
+        validate: function (value) {
+          if (value !== "") {
+            return true;
+          } else {
+            return "Can't be an empty value";
+          }
+        },
       },
       {
         type: "input",
         message: "Managers office number",
         name: "managersNumber",
+        validate: function (value) {
+          if (/\d/.test(value) && value !== "") {
+            return true;
+          } else {
+            return "Please enter a phone number";
+          }
+        },
       },
     ]);
   };
@@ -66,21 +94,49 @@ const addNewEngineer = () => {
         type: "input",
         message: "Engineer's name",
         name: "engineersName",
+        validate: function (value) {
+          if (!/\d/.test(value) && value !== "") {
+            return true;
+          } else {
+            return "Please enter a valid name (cannot be a number or an empty line).";
+          }
+        },
       },
       {
         type: "input",
         message: "Engineer's ID",
         name: "engineersID",
+        validate: function (value) {
+          if (/\d/.test(value) && value !== "") {
+            return true;
+          } else {
+            return "Please enter a valid ID (must be a number).";
+          }
+        },
       },
       {
         type: "input",
         message: "Engineer's email address",
         name: "engineerEmail",
+        validate: function (value) {
+          if (value !== "") {
+            return true;
+          } else {
+            return "Can't be an empty value";
+          }
+        },
       },
       {
         type: "input",
         message: "Engineer's GitHub username",
         name: "engineerGithub",
+        validate: function (value) {
+          if (value !== "") {
+            return true;
+          } else {
+            return "Can't be an empty value";
+          }
+        },
       },
     ]);
   };
@@ -109,21 +165,49 @@ const addNewIntern = () => {
         type: "input",
         message: "Intern's name",
         name: "internsName",
+        validate: function (value) {
+          if (!/\d/.test(value) && value !== "") {
+            return true;
+          } else {
+            return "Please enter a valid name (cannot be a number or an empty line).";
+          }
+        },
       },
       {
         type: "input",
         message: "Interns's ID",
         name: "internsID",
+        validate: function (value) {
+          if (/\d/.test(value) && value !== "") {
+            return true;
+          } else {
+            return "Please enter a valid ID (must be a number).";
+          }
+        },
       },
       {
         type: "input",
         message: "Intern's email address",
         name: "einternsEmail",
+        validate: function (value) {
+          if (value !== "") {
+            return true;
+          } else {
+            return "Can't be an empty value";
+          }
+        },
       },
       {
         type: "input",
         message: "Intern's school",
         name: "internsSchool",
+        validate: function (value) {
+          if (value !== "") {
+            return true;
+          } else {
+            return "Can't be an empty value";
+          }
+        },
       },
     ]);
   };
