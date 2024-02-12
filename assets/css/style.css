@@ -1,5 +1,10 @@
 body {
-  background: #f9f3fc;
+  /* background: #f9f3fc; */
+  background: #35024d;
+}
+.container {
+  padding-bottom: 40px;
+  padding-top: 40px;
 }
 .team-heading {
   background: #7804ad;
@@ -9,7 +14,7 @@ h3.card-title {
   color: #fff;
 }
 .card-header {
-  background: #35024d;
+  background: #7804ad;
   color: #f5e7fc;
 }
 .card-body {
@@ -17,7 +22,7 @@ h3.card-title {
 }
 
 .list-group-item {
-  background: #35024d;
+  background: #7804ad;
   color: #fff;
   border-color: #f5e7fc;
 }
