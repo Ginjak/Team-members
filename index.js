@@ -11,11 +11,11 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./src/page-template.js");
 
-// TODO: Write Code to gather information about the development team members, and render the HTML file.
-
+// Teams array
 let team = [];
 
 // Question
+// Managers details, push them to team array
 const getManagersDetails = () => {
   const mangerQuestions = () => {
     return inquirer.prompt([
@@ -87,6 +87,7 @@ const getManagersDetails = () => {
   init();
 };
 
+// Engineer details, push them to team array
 const addNewEngineer = () => {
   const addEngineer = () => {
     return inquirer.prompt([
@@ -158,6 +159,7 @@ const addNewEngineer = () => {
   init();
 };
 
+// Intern details, push them to team array
 const addNewIntern = () => {
   const addIntern = () => {
     return inquirer.prompt([
@@ -229,6 +231,7 @@ const addNewIntern = () => {
   init();
 };
 
+// Select option
 const selectOption = () => {
   const selectAction = () => {
     return inquirer.prompt([
@@ -270,4 +273,5 @@ const selectOption = () => {
   init();
 };
 
+// Call main function when starting application with node index.js
 getManagersDetails();
