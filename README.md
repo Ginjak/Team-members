@@ -30,6 +30,7 @@ npm install
 
 ## Usage
 
+- [Short video](https://drive.google.com/file/d/1smb0Y4Yw2ASe2wTm9YC7ER_BE1NLZNT3/view?usp=sharing)
 - Run the application using the command in your terminal.
 
 ```bash
