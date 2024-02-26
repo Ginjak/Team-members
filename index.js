@@ -1,3 +1,4 @@
+// Import required modules and dependencies
 const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
@@ -6,9 +7,11 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
+// Output path
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
+// Page template
 const render = require("./src/page-template.js");
 
 // Teams array
@@ -17,6 +20,7 @@ let team = [];
 // Question
 // Managers details, push them to team array
 const getManagersDetails = () => {
+  // Initial question regarding Manger details
   const mangerQuestions = () => {
     return inquirer.prompt([
       {
@@ -24,6 +28,7 @@ const getManagersDetails = () => {
         message: "Team managers name",
         name: "managersName",
         validate: function (value) {
+          // Validation to check if input is not empty and there are no numbers
           if (!/\d/.test(value) && value !== "") {
             return true;
           } else {
@@ -36,6 +41,7 @@ const getManagersDetails = () => {
         message: "Managers ID",
         name: "managersID",
         validate: function (value) {
+          // Validation to check if input is not empty and there are only numbers
           if (/\d/.test(value) && value !== "") {
             return true;
           } else {
@@ -48,6 +54,7 @@ const getManagersDetails = () => {
         message: "Managers email address",
         name: "managersEmail",
         validate: function (value) {
+          // Validation to check if input is not empty
           if (value !== "") {
             return true;
           } else {
@@ -60,6 +67,7 @@ const getManagersDetails = () => {
         message: "Managers office number",
         name: "managersNumber",
         validate: function (value) {
+          // Validation to check if input is not empty and there are only numbers
           if (/\d/.test(value) && value !== "") {
             return true;
           } else {
@@ -69,6 +77,7 @@ const getManagersDetails = () => {
       },
     ]);
   };
+  // Async function to wait for Managers input details, push them to teams array and then display options "Add Engineer, Intern or finish building a team"
   async function init() {
     try {
       const managerInfo = await mangerQuestions();
@@ -96,6 +105,7 @@ const addNewEngineer = () => {
         message: "Engineer's name",
         name: "engineersName",
         validate: function (value) {
+          // Validation to check if input is not empty and there are no numbers
           if (!/\d/.test(value) && value !== "") {
             return true;
           } else {
@@ -108,6 +118,7 @@ const addNewEngineer = () => {
         message: "Engineer's ID",
         name: "engineersID",
         validate: function (value) {
+          // Validation to check if input is not empty and there are only numbers
           if (/\d/.test(value) && value !== "") {
             return true;
           } else {
@@ -120,6 +131,7 @@ const addNewEngineer = () => {
         message: "Engineer's email address",
         name: "engineerEmail",
         validate: function (value) {
+          // Validation to check if input is not empty
           if (value !== "") {
             return true;
           } else {
@@ -132,6 +144,7 @@ const addNewEngineer = () => {
         message: "Engineer's GitHub username",
         name: "engineerGithub",
         validate: function (value) {
+          // Validation to check if input is not empty
           if (value !== "") {
             return true;
           } else {
@@ -141,6 +154,8 @@ const addNewEngineer = () => {
       },
     ]);
   };
+
+  // Async function to wait for Enginners input details, push them to teams array and then display options "Add Engineer, Intern or finish building a team"
   async function init() {
     try {
       const engineerInfo = await addEngineer();
@@ -168,6 +183,7 @@ const addNewIntern = () => {
         message: "Intern's name",
         name: "internsName",
         validate: function (value) {
+          // Validation to check if input is not empty and there are no numbers
           if (!/\d/.test(value) && value !== "") {
             return true;
           } else {
@@ -180,6 +196,7 @@ const addNewIntern = () => {
         message: "Interns's ID",
         name: "internsID",
         validate: function (value) {
+          // Validation to check if input is not empty and there are only numbers
           if (/\d/.test(value) && value !== "") {
             return true;
           } else {
@@ -192,6 +209,7 @@ const addNewIntern = () => {
         message: "Intern's email address",
         name: "einternsEmail",
         validate: function (value) {
+          // Validation to check if input is not empty
           if (value !== "") {
             return true;
           } else {
@@ -204,6 +222,7 @@ const addNewIntern = () => {
         message: "Intern's school",
         name: "internsSchool",
         validate: function (value) {
+          // Validation to check if input is not empty
           if (value !== "") {
             return true;
           } else {
@@ -213,6 +232,8 @@ const addNewIntern = () => {
       },
     ]);
   };
+
+  // Async function to wait for Interns input details, push them to teams array and then display options "Add Engineer, Intern or finish building a team"
   async function init() {
     try {
       const internInfo = await addIntern();
@@ -231,7 +252,7 @@ const addNewIntern = () => {
   init();
 };
 
-// Select option
+// Select option to choose from "Add an enginner, Add an intern or Finish building the team"
 const selectOption = () => {
   const selectAction = () => {
     return inquirer.prompt([
@@ -247,17 +268,18 @@ const selectOption = () => {
       },
     ]);
   };
+
+  // Async function depending what option user choose new function will run. Either Add enginner, Add intern or Finish building the team in which case html file will be generated
   async function init() {
     try {
       const options = await selectAction();
-      console.log(options.options);
       if (options.options === "Add an engineer") {
         addNewEngineer();
       } else if (options.options === "Add an inter") {
         addNewIntern();
       } else {
         const html = render(team);
-        // Write HTML content to the output file
+        // Write HTML file with content to the output file
         fs.writeFile(outputPath, html, (err) => {
           if (err) {
             console.error("Error writing HTML file:", err);
